@@ -3,12 +3,15 @@ import { Platform, StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Home from './src/screens/Home';
-import AllTransaction from './src/screens/AllTransaction';
-import ImportantTransaction from './src/screens/ImportantTransaction';
+import AllExpense from './src/screens/AllExpense';
 import Settings from './src/screens/Settings';
-import AddTransaction from './src/screens/AddTransaction';
+import AddExpense from './src/screens/AddExpense';
 import BottonTabWrapper from './src/components/UI/BottomTabWrapper';
 import TabBarIcon from './src/components/tabBar/TabBarIcon';
+import ImportantExpense from './src/screens/ImportantExpense';
+
+import { Provider } from 'react-redux';
+import store from './src/store/store';
 
 
 const Tabs = createBottomTabNavigator();
@@ -24,7 +27,7 @@ const screenOpt = {
     elevation: 0,
     height: 50,
     backgroundColor: '#fdfdfd',
-    
+
   },
 
   tabBarActiveTintColor: '#4C8CF4'
@@ -32,84 +35,87 @@ const screenOpt = {
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Tabs.Navigator 
-        screenOptions={screenOpt}
-        sceneContainerStyle={{backgroundColor: "white"}}
-      >
-        <Tabs.Screen name='Home' component={Home}
-          options={{
-            tabBarButton: (props) =>( <BottonTabWrapper {...props} route={"Home"}/>),
-            tabBarIcon: ({ focused, color, size }) => (
-              <TabBarIcon 
-                focused={focused}
-                size={size}
-                color={color}
-                text={"Home"}
-                icon={'home'}
-              />
-            )
-          }}
-        />
-        <Tabs.Screen name='All Transactions' component={AllTransaction}
-          options={{
-            tabBarButton: (props) =>( <BottonTabWrapper {...props} route={"All Transactions"}/>),
-            tabBarIcon: ({ focused, color, size }) => (
-              <TabBarIcon 
-                focused={focused}
-                size={size}
-                color={color}
-                text={"Transactions"}
-                icon={'list'}
-              />
-            )
-          }}
-        />
-        <Tabs.Screen name='Add Transaction' component={AddTransaction}
-          options={{
-            tabBarButton: (props) =>( <BottonTabWrapper {...props} route={"Add Transaction"}/>),
-            tabBarIcon: ({ focused, color, size }) => (
-              <TabBarIcon 
-                focused={focused}
-                size={size}
-                color={color}
-                text={"New Expense"}
-                icon={'add-circle'}
-              />
-            )
-          }}
-        />
-        <Tabs.Screen name='Important Transaction' component={ImportantTransaction}
-          options={{
-            tabBarButton: (props) =>( <BottonTabWrapper {...props} route={"Important Transaction"}/>),
-            tabBarIcon: ({ focused, color, size }) => (
-              <TabBarIcon 
-                focused={focused}
-                size={size}
-                color={color}
-                text={"Important"}
-                icon={'star'}
-              />
-            )
-          }}
-        />
-        <Tabs.Screen name='Settings' component={Settings}
-          options={{
-            tabBarButton: (props) =>( <BottonTabWrapper {...props} route={"Settings"}/>),
-            tabBarIcon: ({ focused, color, size }) => (
-              <TabBarIcon 
-                focused={focused}
-                size={size}
-                color={color}
-                text={"Settings"}
-                icon={'settings'}
-              />
-            )
-          }}
-        />
+      <Provider store={store}>
+      <NavigationContainer>
+        <Tabs.Navigator
+          screenOptions={screenOpt}
+          sceneContainerStyle={{ backgroundColor: "white" }}
+        >
+          <Tabs.Screen name='Home' component={Home}
+            options={{
+              tabBarButton: (props) => (<BottonTabWrapper {...props} route={"Home"} />),
+              tabBarIcon: ({ focused, color, size }) => (
+                <TabBarIcon
+                  focused={focused}
+                  size={size}
+                  color={color}
+                  text={"Home"}
+                  icon={'home'}
+                />
+              )
+            }}
+          />
+          <Tabs.Screen name='All Expense' component={AddExpense}
+            options={{
+              tabBarButton: (props) => (<BottonTabWrapper {...props} route={"All Expense"} />),
+              tabBarIcon: ({ focused, color, size }) => (
+                <TabBarIcon
+                  focused={focused}
+                  size={size}
+                  color={color}
+                  text={"Expense"}
+                  icon={'list'}
+                />
+              )
+            }}
+          />
+          <Tabs.Screen name='Add Expense' component={AllExpense}
+            options={{
+              tabBarButton: (props) => (<BottonTabWrapper {...props} route={"Add Expense"} />),
+              tabBarIcon: ({ focused, color, size }) => (
+                <TabBarIcon
+                  focused={focused}
+                  size={size}
+                  color={color}
+                  text={"New Expense"}
+                  icon={'add-circle'}
+                />
+              )
+            }}
+          />
+          <Tabs.Screen name='Important Transaction' component={ImportantExpense}
+            options={{
+              tabBarButton: (props) => (<BottonTabWrapper {...props} route={"Important Transaction"} />),
+              tabBarIcon: ({ focused, color, size }) => (
+                <TabBarIcon
+                  focused={focused}
+                  size={size}
+                  color={color}
+                  text={"Important"}
+                  icon={'star'}
+                />
+              )
+            }}
+          />
+          <Tabs.Screen name='Settings' component={Settings}
+            options={{
+              tabBarButton: (props) => (<BottonTabWrapper {...props} route={"Settings"} />),
+              tabBarIcon: ({ focused, color, size }) => (
+                <TabBarIcon
+                  focused={focused}
+                  size={size}
+                  color={color}
+                  text={"Settings"}
+                  icon={'settings'}
+                />
+              )
+            }}
+          />
 
-      </Tabs.Navigator>
-    </NavigationContainer>
+        </Tabs.Navigator>
+      </NavigationContainer>
+      </Provider>
+
   );
 }
 

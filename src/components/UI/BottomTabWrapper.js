@@ -10,7 +10,7 @@ export default function BottonTabWrapper(props) {
     navigation.navigate(props.route)
   }
 
-  console.log(props)
+
 
   return (
 

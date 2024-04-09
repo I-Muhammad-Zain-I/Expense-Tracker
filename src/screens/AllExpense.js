@@ -1,10 +1,10 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 
-export default function AddTransaction() {
+export default function AllExpense() {
   return (
     <View>
-      <Text>AddTransaction</Text>
+      <Text>AllTransaction</Text>
     </View>
   )
 }
