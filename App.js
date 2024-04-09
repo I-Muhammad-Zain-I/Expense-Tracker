@@ -7,9 +7,10 @@ import AllTransaction from './src/screens/AllTransaction';
 import ImportantTransaction from './src/screens/ImportantTransaction';
 import Settings from './src/screens/Settings';
 import AddTransaction from './src/screens/AddTransaction';
-import Ionicons from '@expo/vector-icons/Ionicons'
 import BottonTabWrapper from './src/components/UI/BottomTabWrapper';
 import TabBarIcon from './src/components/tabBar/TabBarIcon';
+
+
 const Tabs = createBottomTabNavigator();
 
 const screenOpt = {
@@ -22,18 +23,23 @@ const screenOpt = {
     left: 0,
     elevation: 0,
     height: 50,
-    background: '#fff'
-  }
+    backgroundColor: '#fdfdfd',
+    
+  },
+
+  tabBarActiveTintColor: '#4C8CF4'
 }
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Tabs.Navigator screenOptions={screenOpt}>
+      <Tabs.Navigator 
+        screenOptions={screenOpt}
+        sceneContainerStyle={{backgroundColor: "white"}}
+      >
         <Tabs.Screen name='Home' component={Home}
           options={{
             tabBarButton: (props) =>( <BottonTabWrapper {...props} route={"Home"}/>),
-
             tabBarIcon: ({ focused, color, size }) => (
               <TabBarIcon 
                 focused={focused}
@@ -48,7 +54,6 @@ export default function App() {
         <Tabs.Screen name='All Transactions' component={AllTransaction}
           options={{
             tabBarButton: (props) =>( <BottonTabWrapper {...props} route={"All Transactions"}/>),
-
             tabBarIcon: ({ focused, color, size }) => (
               <TabBarIcon 
                 focused={focused}
@@ -64,16 +69,13 @@ export default function App() {
           options={{
             tabBarButton: (props) =>( <BottonTabWrapper {...props} route={"Add Transaction"}/>),
             tabBarIcon: ({ focused, color, size }) => (
-              // <View style={{
-              //   // top: Platform.OS == 'ios' ? -20 : -30,
-              //   width: Platform.OS == 'ios' ? 50 : 60,
-              //   height: Platform.OS == 'ios' ? 50 : 60,
-              //   borderRadius: Platform.OS == 'ios' ? 25 : 30,
-              //   alignItems: 'center',
-              //   justifyContent: 'center'
-              // }}>
-                <Ionicons name={"add-circle"} size={40} color={focused ? "red" : "green"} />
-              // </View>
+              <TabBarIcon 
+                focused={focused}
+                size={size}
+                color={color}
+                text={"New Expense"}
+                icon={'add-circle'}
+              />
             )
           }}
         />

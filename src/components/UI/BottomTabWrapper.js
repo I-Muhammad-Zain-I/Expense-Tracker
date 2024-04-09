@@ -10,12 +10,14 @@ export default function BottonTabWrapper(props) {
     navigation.navigate(props.route)
   }
 
+  console.log(props)
+
   return (
 
     <>
       <Pressable android_ripple={{"color": "grey"}}
         onPress={onPressHandler}
-        style={({pressed}) =>  [pressed ? [props.style, styles.pressed] : props.style ]}
+        style={({pressed}) =>  [pressed ? [props.style, styles.pressed] : props.style]}
       >
       
           {props.children}
@@ -28,7 +30,12 @@ export default function BottonTabWrapper(props) {
 const styles = StyleSheet.create({
   pressed: {
     opacity: 0.3,
-    
+  },
+  activeTab: {
+    borderTopWidth: 2,
+    borderTopColor: '#333',
+   
   }
  
 })
+
