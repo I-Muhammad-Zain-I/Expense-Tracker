@@ -55,7 +55,7 @@ export default function App() {
               )
             }}
           />
-          <Tabs.Screen name='All Expense' component={AddExpense}
+          <Tabs.Screen name='All Expense' component={AllExpense}
             options={{
               tabBarButton: (props) => (<BottonTabWrapper {...props} route={"All Expense"} />),
               tabBarIcon: ({ focused, color, size }) => (
@@ -69,7 +69,7 @@ export default function App() {
               )
             }}
           />
-          <Tabs.Screen name='Add Expense' component={AllExpense}
+          <Tabs.Screen name='Add Expense' component={AddExpense}
             options={{
               tabBarButton: (props) => (<BottonTabWrapper {...props} route={"Add Expense"} />),
               tabBarIcon: ({ focused, color, size }) => (

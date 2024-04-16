@@ -10,7 +10,7 @@ export default function Home(props) {
 
 
 
-  const expenseList = useSelector((state) => state.expenses.expenseList.slice(0, 11));
+  const expenseList = useSelector((state) => state.expenses.expenseList).slice(0,11);
 
 
   const onViewAll = () => {
