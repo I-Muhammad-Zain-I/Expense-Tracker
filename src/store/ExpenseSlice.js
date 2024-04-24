@@ -5,7 +5,7 @@ const initialState = {
     {
       'id': 1,
       'name': 'John Doe',
-      'date': '2024-04-01',
+      'date': 'Sat Aug 21, 2023',
       'category': 'transportation',
       'amount': 45.67,
       'favorite': false
@@ -13,7 +13,7 @@ const initialState = {
     {
       'id': 2,
       'name': 'Emily Smith',
-      'date': '2024-04-03',
+      'date': 'Sat Aug 22, 2023',
       'category': 'food',
       'amount': 23.89,
       'favorite': true
@@ -21,7 +21,7 @@ const initialState = {
     {
       'id': 3,
       'name': 'Michael Johnson',
-      'date': '2024-04-05',
+      'date': 'Sat May 23, 2023',
       'category': 'shopping',
       'amount': 102.50,
       'favorite': true
@@ -29,7 +29,7 @@ const initialState = {
     {
       'id': 4,
       'name': 'Sarah Brown',
-      'date': '2024-04-08',
+      'date': 'Sat May 21, 2023',
       'category': 'food',
       'amount': 75.20,
       'favorite': false
@@ -37,7 +37,7 @@ const initialState = {
     {
       'id': 5,
       'name': 'David Miller',
-      'date': '2024-04-10',
+      'date': 'Sat May 24, 2023',
       'category': 'other',
       'amount': 95.75,
       'favorite': true
@@ -45,7 +45,7 @@ const initialState = {
     {
       'id': 6,
       'name': 'Jennifer Lee',
-      'date': '2024-04-12',
+      'date': 'Sat May 15, 2023',
       'category': 'other',
       'amount': 210.30,
       'favorite': false
@@ -53,7 +53,7 @@ const initialState = {
     {
       'id': 7,
       'name': 'Chris Wilson',
-      'date': '2024-04-14',
+      'date': 'Sat Apr 21, 2023',
       'category': 'other',
       'amount': 47.60,
       'favorite': false
@@ -61,7 +61,7 @@ const initialState = {
     {
       'id': 8,
       'name': 'Samantha Taylor',
-      'date': '2024-04-16',
+      'date': 'Sat Apr 21, 2023',
       'category': 'transportation',
       'amount': 33.45,
       'favorite': true
@@ -69,7 +69,7 @@ const initialState = {
     {
       'id': 9,
       'name': 'Kevin Anderson',
-      'date': '2024-04-18',
+      'date': 'Sat Apr 21, 2023',
       'category': 'food',
       'amount': 56.78,
       'favorite': false
@@ -77,7 +77,7 @@ const initialState = {
     {
       'id': 10,
       'name': 'Amanda Martin',
-      'date': '2024-04-20',
+      'date': 'Sat Apr 21, 2023',
       'category': 'shopping',
       'amount': 123.99,
       'favorite': true
@@ -171,7 +171,13 @@ const expenseSlice = createSlice({
   name: 'expense',
   initialState: initialState,
   reducers: {
-    a: () => { }
+    addExpenseItem: (state, action) => {
+      // console.log(action.payload)
+      const newExpense = {...action.payload, id: Math.floor(Math.random()* 300)}
+      console.log(newExpense);
+      state.expenseList.unshift(newExpense)
+      console.log("Added To store");
+    }
   }
 });
 

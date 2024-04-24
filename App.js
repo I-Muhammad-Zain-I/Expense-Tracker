@@ -72,6 +72,8 @@ export default function App() {
           <Tabs.Screen name='Add Expense' component={AddExpense}
             options={{
               tabBarButton: (props) => (<BottonTabWrapper {...props} route={"Add Expense"} />),
+              headerShown: true,
+              unmountOnBlur: true,
               tabBarIcon: ({ focused, color, size }) => (
                 <TabBarIcon
                   focused={focused}

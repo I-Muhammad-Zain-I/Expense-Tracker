@@ -1,41 +1,48 @@
-import { View, Text, StyleSheet, Pressable, TextInput, Image } from 'react-native'
+import { View, Text, StyleSheet, Pressable, TextInput, Image, ScrollView } from 'react-native'
 import Ionicons from '@expo/vector-icons/Ionicons'
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import COLORS from '../../constants/Colors'
+import { useSelector } from 'react-redux'
+import { getImageForCategory } from '../../utils/utilFunctions'
+import CATEGORIES from '../../constants/categories'
 
-const categories = [
-  {
-    category: "Transportation",
-    image: require('../../../assets/icons/transportation.png')
-  },
-  {
-    category: "Food",
-    image: require('../../../assets/icons/food.png')
-  },
-  {
-    category: "Shopping",
-    image: require('../../../assets/icons/shopping.png')
-  }
-]
+export default function DropdownInput(props) {
 
-export default function DropdownInput() {
-
-  const [selectedCategory, setSelectedCategory] = useState("Select Category")
   const [isPressed, setIsPressed] = useState(false)
+  const [searchedCategories, setSearchedCategories] = useState([]);
+
+  const searchRef = useRef();
+
 
   const dropDownPressHandler = () => {
     console.log('hello')
     setIsPressed(ip => !ip)
   }
 
+  const categorySearchHandler = (searchedCategory) => {
+    if (searchedCategory.trim()) {
+      setSearchedCategories(CATEGORIES.filter((category) => category.category.includes(searchedCategory)))
+    } else {
+      setSearchedCategories([]);
+    }
+  }
+  const dropDownOptionSelectHandler = (selCategory) => {
+    props.setSelectedCategory(selCategory);
+    setIsPressed(false);
+    searchRef.current.clear();
+    setSearchedCategories([]);
+  }
+
+
+
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>Category Drop Down</Text>
+      <Text>Choose Category</Text>
       <Pressable
         style={styles.dropDownSelector}
         onPress={dropDownPressHandler}
       >
-        <Text>Select Category</Text>
+        <Text>{props.selectedCategory}</Text>
         <Ionicons name={isPressed ? "caret-up-outline" : "caret-down-outline"} size={24} />
       </Pressable>
       {
@@ -45,18 +52,26 @@ export default function DropdownInput() {
             <TextInput
               placeholder='Search'
               style={styles.searchInput}
+              onChangeText={categorySearchHandler}
+              ref={searchRef}
+
             />
             <Ionicons name='search-outline' size={24} />
           </View>
           <View style={styles.categoriesContainer}>
-            {
-              categories.map((category) =>
-                <View style={styles.dropDownItem}>
-                  <Image style={styles.dropDownItemImage} source={category.image} />
-                  <Text>{category.category}</Text>
-                </View>
-              )
-            }
+            <ScrollView style={styles.scrollStyle} contentContainerStyle={styles.categoriesContentContainer}>
+              {
+                (searchedCategories.length ? searchedCategories : CATEGORIES).map((category, index) =>
+                  <Pressable style={({ pressed }) => pressed ? [styles.dropDownItem, styles.pressed] : styles.dropDownItem}
+                    onPress={() => dropDownOptionSelectHandler(category)}
+                    key={index}
+                  >
+                    <Image style={styles.dropDownItemImage} source={getImageForCategory(category)} />
+                    <Text>{category}</Text>
+                  </Pressable>
+                )
+              }
+            </ScrollView>
           </View>
         </View>
       }
@@ -68,8 +83,9 @@ export default function DropdownInput() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     // borderWidth: 2,
+    width: "90%",
   },
   heading: {
     fontSize: 20,
@@ -77,48 +93,34 @@ const styles = StyleSheet.create({
     marginTop: 50,
     alignSelf: 'center',
     // color:'black'
+  
 
   },
   dropDownSelector: {
     // flex:1,
-    width: '90%',
+    width: '100%',
     height: 50,
     borderRadius: 10,
     borderWidth: 2,
     borderColor: "#8e8e8e",
     alignSelf: 'center',
-    marginTop: 50,
+    marginTop: 5,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 15,
   },
   dropDownArea: {
-    // flex: 1,
-    // flexDirection: 'column',
-    // width: '90%',
-    // maxWidth: '90%',
-    height: 300,
+    // flex: 1,s
     borderRadius: 5,
-    // marginTop: 10,
-    // elevation: 1,
-
     margin: 8,
     shadowColor: '#bdbdbd',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.5,
     shadowRadius: 2,
     elevation: 4,
-
-    // borderColor: COLORS['grey-100'],
-    // borderWidth: 0.5,
-    // shadowColor: COLORS['grey-100'],
-    // shadowOffset: 2,
-    // shadowOpacity: 0.6,
-    // shadowRadius: 5,
-    // minWidth: '90%',
-    // alignItems: 'flex-start',
-    // alignSelf: 'flex-start',
+    // borderWidth: 2,
+    height: 300
   },
   searchContainer: {
     borderRadius: 10,
@@ -136,7 +138,7 @@ const styles = StyleSheet.create({
 
     // minWidth: '90%',
     height: 50,
-
+    
     borderColor: COLORS['grey-200'],
     alignItems: 'center',
     alignSelf: 'center',
@@ -144,12 +146,18 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     paddingLeft: 15,
   },
-  categoriesContainer: {
+  categoriesContentContainer: {
+    // overflow: 'hidden',
+    // borderWidth: 2,
+
     rowGap: 8,
-    marginTop: 12
+    // marginVertical: 10,
+  },
+  categoriesContainer: {
+    marginTop: 20
   },
   dropDownItem: {
-    
+
     // borderTopWidth: 0.5,
     borderBottomWidth: 0.5,
     borderColor: COLORS['grey-100'],
@@ -164,5 +172,13 @@ const styles = StyleSheet.create({
   dropDownItemImage: {
     width: 36,
     height: 36
+  },
+  pressed: {
+    opacity: 0.5
+  },
+  scrollStyle: {
+    
+    height: 170,
+    // borderWidth: 2,
   }
 })

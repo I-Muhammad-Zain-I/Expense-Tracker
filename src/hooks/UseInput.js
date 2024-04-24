@@ -7,25 +7,27 @@ const useInput = (validityFunc, initialValue) => {
   console.log("touched", istouched)
 
   const onValueChangeHandler = (enteredValue) => {
-    if(istouched == false) {
+    if (istouched == false) {
       setIsTouched(true);
     }
     console.log("s", enteredValue)
-    setEnteredValue(enteredValue); 
+    setEnteredValue(enteredValue);
   }
 
+ 
   console.log('istouched', istouched)
 
-  const isValid =  validityFunc(value);
+  const isValid = validityFunc(value);
 
   const hasError = !isValid && istouched;
-  
-  
+
+
   return {
     value,
     isValid,
     hasError,
-    onValueChangeHandler
+    onValueChangeHandler,
+    setIsTouched,
   }
 }
 

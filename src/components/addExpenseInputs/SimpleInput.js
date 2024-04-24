@@ -3,9 +3,13 @@ import React from 'react'
 import COLORS from '../../constants/Colors'
 
 export default function SimpleInput(props) {
+
+
+
+
   return (
     <View style={styles.inputContainer}>
-      <Text style={styles.nameInputLabel}>{props.inputLabel}</Text>
+      <Text >{props.inputLabel}</Text>
       <TextInput
         keyboardType={props.keyboardType}
         autoCapitalize='none'
@@ -14,6 +18,7 @@ export default function SimpleInput(props) {
         onChangeText={props.onValueChange}
         style={styles.input}
         value={props.value}
+        onBlur={props.onAmountBlur ?? null}
       />
       {props.inputHasError && <Text style={styles.warningText}>{props.invalidWarning}</Text>}
     </View>
@@ -23,6 +28,8 @@ export default function SimpleInput(props) {
 const styles = {
   inputContainer: {
     width: '90%',
+    // flex: 1
+   
   },
   input: {
     borderWidth: 2,
@@ -31,7 +38,7 @@ const styles = {
     paddingHorizontal: 16,
     fontSize: 20,
     borderColor: COLORS['grey-100'],
-    color: COLORS['grey-100'],
+    // color: COLORS['grey-100'],
     marginVertical: 4,
 
     borderRadius: 10
@@ -39,6 +46,6 @@ const styles = {
   warningText: {
     color: 'red',
     fontSize: 12,
-    width: '70%'
+    width: '90%'
   }
 }
