@@ -5,6 +5,7 @@ import COLORS from '../../constants/Colors'
 import { useSelector } from 'react-redux'
 import { getImageForCategory } from '../../utils/utilFunctions'
 import CATEGORIES from '../../constants/categories'
+import Searchbar from './Searchbar'
 
 export default function DropdownInput(props) {
 
@@ -20,8 +21,10 @@ export default function DropdownInput(props) {
   }
 
   const categorySearchHandler = (searchedCategory) => {
+    console.log(searchedCategory)
     if (searchedCategory.trim()) {
-      setSearchedCategories(CATEGORIES.filter((category) => category.category.includes(searchedCategory)))
+
+      setSearchedCategories(CATEGORIES.filter(({name}) => name.includes(searchedCategory)))
     } else {
       setSearchedCategories([]);
     }
@@ -29,7 +32,8 @@ export default function DropdownInput(props) {
   const dropDownOptionSelectHandler = (selCategory) => {
     props.setSelectedCategory(selCategory);
     setIsPressed(false);
-    searchRef.current.clear();
+
+    searchRef.current.clearSearch();
     setSearchedCategories([]);
   }
 
@@ -48,26 +52,20 @@ export default function DropdownInput(props) {
       {
         isPressed &&
         <View style={styles.dropDownArea}>
-          <View style={styles.searchContainer}>
-            <TextInput
-              placeholder='Search'
-              style={styles.searchInput}
-              onChangeText={categorySearchHandler}
-              ref={searchRef}
-
-            />
-            <Ionicons name='search-outline' size={24} />
-          </View>
+         <Searchbar 
+          onSearch = {categorySearchHandler}
+          ref={searchRef}
+         />
           <View style={styles.categoriesContainer}>
             <ScrollView style={styles.scrollStyle} contentContainerStyle={styles.categoriesContentContainer}>
               {
-                (searchedCategories.length ? searchedCategories : CATEGORIES).map((category, index) =>
+                (searchedCategories.length ? searchedCategories : CATEGORIES).map(({id, name}) =>
                   <Pressable style={({ pressed }) => pressed ? [styles.dropDownItem, styles.pressed] : styles.dropDownItem}
-                    onPress={() => dropDownOptionSelectHandler(category)}
-                    key={index}
+                    onPress={() => dropDownOptionSelectHandler(name)}
+                    key={id}
                   >
-                    <Image style={styles.dropDownItemImage} source={getImageForCategory(category)} />
-                    <Text>{category}</Text>
+                    <Image style={styles.dropDownItemImage} source={getImageForCategory(name)} />
+                    <Text>{name}</Text>
                   </Pressable>
                 )
               }

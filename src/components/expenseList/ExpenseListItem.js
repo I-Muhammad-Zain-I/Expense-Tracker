@@ -1,36 +1,50 @@
-import { View, Text } from 'react-native'
+import { View, Text, StyleSheet, FlatList } from 'react-native'
 import React from 'react'
+import { getImageForCategory } from '../../utils/utilFunctions';
+import ExpenseItem from './ExpenseItem';
 
+export default function ExpenseListItem({ expenseListData }) {
 
-const getImageForCategory = (category) => {
-  switch (category) {
-    case 'food':
-      return require('../../assets/icons/food.png');
-    case 'transportation':
-      return require('../../assets/icons/transportation.png');
-    case 'shopping':
-      return require('../../assets/icons/shopping.png');
-    case 'grocery':
-      return require('../../assets/icons/grocery.png');
+  const renderListItem = (itemData) => {
+    const { id, name, category, date, favorite, amount } = itemData.item
+    return <ExpenseItem
+      key={id}
+      expenseName={name}
+      source={getImageForCategory(category)}
+      date={date}
+      favorite={favorite}
+      amount={amount}
+    >
 
-    default:
-      return require('../../assets/icons/other.png');
+    </ExpenseItem>
   }
-}
 
-export default function ExpenseListItem({expenseListData}) {
-  
+
+
   return (
-    <View>
-      {
-        expenseListData.map(({ id, name, category }) => <ExpenseItem
-          key={id}
-          expenseName={name}
-          source={getImageForCategory(category)}
-        >
 
-        </ExpenseItem>)
-      }
+    <View style={styles.listContainer}>
+      <FlatList
+        data={expenseListData}
+        renderItem={renderListItem}
+        keyExtractor={(item) => item.id}
+        contentContainerStyle={{rowGap: 10}}
+      />
+
+
+      
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  listContainer: {
+    flex: 1,
+    // borderWidth: 2,
+    width: "100%",
+    paddingBottom: 80
+    // borderWidth: 2,
+    // height:"100%"
+    // columnGap: 10,
+  }
+})

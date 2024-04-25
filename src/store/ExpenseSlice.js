@@ -4,7 +4,7 @@ const initialState = {
   expenseList: [
     {
       'id': 1,
-      'name': 'John Doe',
+      'name': 'Hawksbay Picnic',
       'date': 'Sat Aug 21, 2023',
       'category': 'transportation',
       'amount': 45.67,
@@ -12,7 +12,7 @@ const initialState = {
     },
     {
       'id': 2,
-      'name': 'Emily Smith',
+      'name': 'Galaxy Food Point',
       'date': 'Sat Aug 22, 2023',
       'category': 'food',
       'amount': 23.89,
@@ -20,7 +20,7 @@ const initialState = {
     },
     {
       'id': 3,
-      'name': 'Michael Johnson',
+      'name': 'Imtiaz Mega',
       'date': 'Sat May 23, 2023',
       'category': 'shopping',
       'amount': 102.50,
@@ -28,7 +28,7 @@ const initialState = {
     },
     {
       'id': 4,
-      'name': 'Sarah Brown',
+      'name': 'Burger',
       'date': 'Sat May 21, 2023',
       'category': 'food',
       'amount': 75.20,
@@ -36,7 +36,7 @@ const initialState = {
     },
     {
       'id': 5,
-      'name': 'David Miller',
+      'name': 'Tip',
       'date': 'Sat May 24, 2023',
       'category': 'other',
       'amount': 95.75,
@@ -44,15 +44,15 @@ const initialState = {
     },
     {
       'id': 6,
-      'name': 'Jennifer Lee',
+      'name': 'Carrots & Lettuce',
       'date': 'Sat May 15, 2023',
-      'category': 'other',
+      'category': 'grocery',
       'amount': 210.30,
       'favorite': false
     },
     {
       'id': 7,
-      'name': 'Chris Wilson',
+      'name': 'Savings',
       'date': 'Sat Apr 21, 2023',
       'category': 'other',
       'amount': 47.60,
@@ -60,7 +60,7 @@ const initialState = {
     },
     {
       'id': 8,
-      'name': 'Samantha Taylor',
+      'name': 'Univeristy Fare',
       'date': 'Sat Apr 21, 2023',
       'category': 'transportation',
       'amount': 33.45,
@@ -68,7 +68,7 @@ const initialState = {
     },
     {
       'id': 9,
-      'name': 'Kevin Anderson',
+      'name': 'Pizza',
       'date': 'Sat Apr 21, 2023',
       'category': 'food',
       'amount': 56.78,
@@ -76,7 +76,7 @@ const initialState = {
     },
     {
       'id': 10,
-      'name': 'Amanda Martin',
+      'name': 'Imtiaz Mega',
       'date': 'Sat Apr 21, 2023',
       'category': 'shopping',
       'amount': 123.99,
