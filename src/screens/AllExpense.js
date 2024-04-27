@@ -2,7 +2,6 @@ import { View, Text, StyleSheet, StatusBar, TextInput, FlatList, Image } from 'r
 import React, { useEffect, useRef, useState } from 'react'
 
 import COLORS from '../constants/Colors';
-
 import Searchbar from '../components/addExpenseInputs/Searchbar';
 
 import FilterExpenseCategory from '../components/allExpenses/FilterExpenseCategory';
@@ -68,7 +67,8 @@ export default function AllExpense() {
           filteredExpense.filter(({ name }) => name.toLowerCase().includes(searchExpense.toLowerCase()))
         );
       }
-    } else {
+    } 
+    else {
       setSearchedExpense([]);
     }
     setSearchVal(searchExpense.trim());
