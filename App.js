@@ -20,13 +20,14 @@ const screenOpt = {
   tabBarShowLabel: false,
   headerShown: false,
   tabBarStyle: {
-    position: 'absolute',
+    // position: 'absolute', // commented because being absolute it was hiding flatlist behind it -> AllExpense.js
     bottom: 0,
     right: 0,
     left: 0,
     elevation: 0,
     height: 50,
     backgroundColor: '#fdfdfd',
+    // flex: 1
 
   },
 

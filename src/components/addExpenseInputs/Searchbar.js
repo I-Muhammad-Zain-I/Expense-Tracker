@@ -13,6 +13,7 @@ const Searchbar = forwardRef((props, ref) => {
 
   useImperativeHandle(ref, React.useCallback(() => {
     return {
+      searchValue: searchRef.current.value,
       clearSearch: () => { searchRef.current.clear() }
     }
   }, []))

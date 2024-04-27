@@ -28,7 +28,8 @@ export default function ExpenseListItem({ expenseListData }) {
         data={expenseListData}
         renderItem={renderListItem}
         keyExtractor={(item) => item.id}
-        contentContainerStyle={{rowGap: 10}}
+        contentContainerStyle={{rowGap: 10, paddingBottom: 10}}
+
       />
 
 
@@ -42,7 +43,7 @@ const styles = StyleSheet.create({
     flex: 1,
     // borderWidth: 2,
     width: "100%",
-    paddingBottom: 80
+    // paddingBottom: 80
     // borderWidth: 2,
     // height:"100%"
     // columnGap: 10,

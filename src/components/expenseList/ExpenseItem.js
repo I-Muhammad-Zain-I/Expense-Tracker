@@ -4,7 +4,7 @@ import Ionicons from '@expo/vector-icons/Ionicons'
 import COLORS from '../../constants/Colors';
 
 export default function ExpenseItem(props) {
-  console.log(props.date);
+  // console.log(props.date);
   return (
     <View style={styles.rootContainer}>
       <View style={styles.mediaObject}>
@@ -29,7 +29,7 @@ export default function ExpenseItem(props) {
 
 const styles = StyleSheet.create({
   rootContainer: {
-    // flex: 1,
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
